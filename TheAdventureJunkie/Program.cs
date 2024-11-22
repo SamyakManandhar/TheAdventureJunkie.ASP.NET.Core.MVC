@@ -1,12 +1,16 @@
+using Microsoft.EntityFrameworkCore;
 using TheAdventureJunkie.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<TheAdventureJunkieDbContext>(options => {
+	options.UseSqlServer(builder.Configuration["ConnectionStrings:TheAdventureJunkieDbContextConnection"]);
+});
 
-builder.Services.AddTransient<IEventRepository,MockEventRepository>();
-builder.Services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+builder.Services.AddTransient<IEventRepository,EventRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
@@ -29,4 +33,5 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
+DbInitializer.Seed(app);
 app.Run();
