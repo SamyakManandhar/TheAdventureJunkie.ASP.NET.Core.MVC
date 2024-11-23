@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheAdventureJunkie.Models;
 
@@ -11,9 +12,11 @@ using TheAdventureJunkie.Models;
 namespace TheAdventureJunkie.Migrations
 {
     [DbContext(typeof(TheAdventureJunkieDbContext))]
-    partial class TheAdventureJunkieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241123133908_OrderAdded")]
+    partial class OrderAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

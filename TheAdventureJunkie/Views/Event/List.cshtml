@@ -11,14 +11,7 @@
 <div class="row">
 @foreach (var Event in Model.Events)
 {
-    <div class="card col-md-4 m-3" style="width: 18rem;">
-        <img src="@Event.ImageUrl" class="card-img-top img-fluid" alt="Event Image">
-        <div class="card-body">
-            <h5 class="card-title">@Event.Name</h5>
-            <p class="card-text">@Event.EventDateTime</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
+    <partial name="_EventCard" model="Event" />
 
 }
 </div>

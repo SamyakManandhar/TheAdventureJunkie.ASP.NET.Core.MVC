@@ -1,0 +1,15 @@
+﻿@model Event
+
+<div class="card col-md-4 m-3" style="width: 18rem;">
+	<img src="@Model.ImageUrl" class="card-img-top img-fluid" alt="Event Image">
+	<div class="card-body">
+		<h5 class="card-title">@Model.Name</h5>
+		<p class="card-text">@Model.Category.CategoryName</p>
+		<p class="card-text">@Model.EventDateTime</p>
+		<div class="row">
+			<a asp-controller="Event" asp-action="Details" asp-route-id="@Model.EventId" class="btn btn-primary mb-2">View Details</a>
+			<a class="btn btn-success mt-2" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+			   asp-route-eventId="@Model.EventId"> + Add to cart</a>
+		</div>
+	</div>
+</div>
