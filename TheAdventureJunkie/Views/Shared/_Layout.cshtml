@@ -6,8 +6,8 @@
 	<title>@ViewData["Title"] - TheAdventureJunkie</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/TheAdventureJunkie.styles.css" asp-append-version="true" />
 	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="stylesheet" href="~/TheAdventureJunkie.styles.css" asp-append-version="true" />
 </head>
 <body>
 	<header>
@@ -24,9 +24,14 @@
 							<a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="List">Events</a>
 						</li>
 						<li class="nav-item">
+							<vc:category-menu></vc:category-menu>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 						</li>
+
 					</ul>
+					<vc:shopping-cart-summary></vc:shopping-cart-summary>
 				</div>
 			</div>
 		</nav>
@@ -42,7 +47,8 @@
 			<address>
 				<h2>The Adventure Junkie</h2>
 				<p>London EC3A 8AB</p>
-				<small>&copy; 2024 - TheAdventureJunkie - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></small>
+				<small>&copy; 2024 - TheAdventureJunkie - Contact us via <a href="mailto:sammy.manandhar2004@gmail.com">email</a></small>
+
 			</address>
 		</div>
 	</footer>
