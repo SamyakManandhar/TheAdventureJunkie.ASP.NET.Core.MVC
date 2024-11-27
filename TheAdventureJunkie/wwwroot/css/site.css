@@ -19,10 +19,14 @@ html {
 
 body {
     margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
 }
 
-
 footer {
+    position:relative;
     padding: 1em;
     background-color: #ccc;
 }
@@ -36,4 +40,5 @@ footer small {
 footer address h2{
     font-size: 1.25em;
 }
+
 

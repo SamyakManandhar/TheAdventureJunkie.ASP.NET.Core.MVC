@@ -27,7 +27,7 @@ namespace TheAdventureJunkie.Models
 				var orderDetail = new OrderDetail
 				{
 					Amount = shoppingCartItem.Amount,
-					PieId = shoppingCartItem.Event.EventId,
+					EventId = shoppingCartItem.Event.EventId,
 					Price = shoppingCartItem.Event.Price
 				};
 

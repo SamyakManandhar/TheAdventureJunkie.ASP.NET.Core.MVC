@@ -1,13 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using TheAdventureJunkie.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("TheAdventureJunkieDbContextConnection") ?? throw new InvalidOperationException("Connection string 'TheAdventureJunkieDbContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TheAdventureJunkieDbContext>(options => {
 	options.UseSqlServer(builder.Configuration["ConnectionStrings:TheAdventureJunkieDbContextConnection"]);
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<TheAdventureJunkieDbContext>();
 
 builder.Services.AddTransient<IEventRepository,EventRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
@@ -31,13 +35,16 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 
-app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseAntiforgery();
+app.MapRazorPages();
+
 
 DbInitializer.Seed(app);
 app.Run();
