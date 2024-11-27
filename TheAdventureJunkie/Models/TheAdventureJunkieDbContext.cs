@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheAdventureJunkie.Models
 {
-	public class TheAdventureJunkieDbContext : DbContext
+	public class TheAdventureJunkieDbContext : IdentityDbContext
 	{
 		public TheAdventureJunkieDbContext(DbContextOptions<TheAdventureJunkieDbContext> options) : base(options)
 		{
