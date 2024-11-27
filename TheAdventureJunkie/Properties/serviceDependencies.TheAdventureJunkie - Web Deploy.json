@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/TheAdventureJunkie/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsTheAdventureJunkieDbCon_FAA2E4F3E7",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/theadventurejunkiedbserver/databases/TheAdventureJunkie_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:TheAdventureJunkieDbContextConnection",
+      "dynamicId": null
+    }
+  }
+}
