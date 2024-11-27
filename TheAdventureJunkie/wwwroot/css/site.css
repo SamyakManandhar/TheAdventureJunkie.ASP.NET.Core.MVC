@@ -26,19 +26,19 @@ body {
 }
 
 footer {
-    position:relative;
+    position: relative;
     padding: 1em;
     background-color: #ccc;
 }
 
-footer address h2,
-footer address p,
-footer small {
-    margin:0;
-}
+    footer address h2,
+    footer address p,
+    footer small {
+        margin: 0;
+    }
 
-footer address h2{
-    font-size: 1.25em;
-}
+    footer address h2 {
+        font-size: 1.25em;
+    }
 
 
