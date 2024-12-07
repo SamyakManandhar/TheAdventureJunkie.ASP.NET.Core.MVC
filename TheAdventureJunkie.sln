@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheAdventureJunkie", "TheAdventureJunkie\TheAdventureJunkie.csproj", "{DCF337D0-865F-4F68-A43F-DDDDDC0E8462}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLTrigFuncApp", "SQLTrigFuncApp\SQLTrigFuncApp.csproj", "{261B3302-1944-4D90-8CD5-126E0CE0EFAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DCF337D0-865F-4F68-A43F-DDDDDC0E8462}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCF337D0-865F-4F68-A43F-DDDDDC0E8462}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCF337D0-865F-4F68-A43F-DDDDDC0E8462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{261B3302-1944-4D90-8CD5-126E0CE0EFAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{261B3302-1944-4D90-8CD5-126E0CE0EFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{261B3302-1944-4D90-8CD5-126E0CE0EFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{261B3302-1944-4D90-8CD5-126E0CE0EFAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
