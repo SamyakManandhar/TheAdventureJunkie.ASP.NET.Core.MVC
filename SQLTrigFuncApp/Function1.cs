@@ -6,23 +6,35 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 namespace SQLTrigFuncApp
 {
+    public class MultiResponse
+    {
+        [ServiceBusOutput("ordersqueue", Connection = "QueueConnectionString")]
+        public string[] Messages { get; set; }
+    }
     public class Function1
     {
-        private readonly ILogger _logger;
-
-        public Function1(ILoggerFactory loggerFactory)
-        {
-            _logger = loggerFactory.CreateLogger<Function1>();
-        }
-
-        // Visit https://aka.ms/sqltrigger to learn how to use this trigger binding
         [Function("Function1")]
-        public void Run(
+        public static MultiResponse Run(
             [SqlTrigger("[dbo].[Orders]", "ConnectionStrings")] IReadOnlyList<SqlChange<Orders>> changes,
                 FunctionContext context)
         {
-            _logger.LogInformation("SQL Changes: " + JsonConvert.SerializeObject(changes));
+            var logger = context.GetLogger("Function1");
 
+            // Prepare messages to send to the Service Bus queue
+
+            var queueMessages = new List<string>();
+
+            foreach (var change in changes)
+            {
+                logger.LogInformation("Operartion:"+ change.Operation);
+                logger.LogInformation("SQL Changes: " + JsonConvert.SerializeObject(change.Item));
+                queueMessages.Add(JsonConvert.SerializeObject(change.Item));
+
+            }
+            return new MultiResponse
+            {
+                Messages = queueMessages.ToArray()
+            };
         }
     }
 
