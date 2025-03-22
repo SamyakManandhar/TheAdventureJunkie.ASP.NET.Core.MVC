@@ -17,22 +17,22 @@ namespace TheAdventureJunkie.Controllers
 		}
 		public IActionResult List(string category)
 		{
-            IEnumerable<Event> pies;
+            IEnumerable<Event> events;
             string? currentCategory;
 
             if (string.IsNullOrEmpty(category))
             {
-                pies = _eventRepository.AllEvents.OrderBy(p => p.EventId);
+                events = _eventRepository.AllEvents.OrderBy(p => p.EventId);
                 currentCategory = "All Events";
             }
             else
             {
-                pies = _eventRepository.AllEvents.Where(p => p.Category.CategoryName == category)
+                events = _eventRepository.AllEvents.Where(p => p.Category.CategoryName == category)
                     .OrderBy(p => p.EventId);
                 currentCategory = _categoryRepository.AllCategories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
             }
 
-            return View(new EventListViewModel(pies, currentCategory));
+            return View(new EventListViewModel(events, currentCategory));
         }
 
 		public IActionResult Details(int id)
