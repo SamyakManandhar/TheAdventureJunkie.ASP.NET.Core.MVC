@@ -1,18 +1,19 @@
 ﻿using TheAdventureJunkie.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TheAdventureJunkie.Contracts;
 
 
 namespace TheAdventureJunkie.Controllers
 {
-	[Authorize]
+    [Authorize]
 
 	public class OrderController : Controller
 	{
 		private readonly IOrderRepository _orderRepository;
-		private readonly IShoppingCart _shoppingCart;
+		private readonly IShoppingCartService _shoppingCart;
 
-		public OrderController(IOrderRepository orderRepository, IShoppingCart shoppingCart)
+		public OrderController(IOrderRepository orderRepository, IShoppingCartService shoppingCart)
 		{
 			_orderRepository = orderRepository;
 			_shoppingCart = shoppingCart;

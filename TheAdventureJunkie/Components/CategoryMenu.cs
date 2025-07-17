@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheAdventureJunkie.Models;
+using TheAdventureJunkie.Contracts;
 
 namespace TheAdventureJunkie.Components
 {
-	public class CategoryMenu: ViewComponent
+    public class CategoryMenu: ViewComponent
 	{
 		private readonly ICategoryRepository _categoryRepository;
 

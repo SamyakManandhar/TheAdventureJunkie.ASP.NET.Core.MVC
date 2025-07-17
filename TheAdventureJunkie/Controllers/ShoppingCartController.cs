@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheAdventureJunkie.Models;
+using TheAdventureJunkie.Contracts;
 using TheAdventureJunkie.ViewModels;
 
 namespace TheAdventureJunkie.Controllers
 {
-	public class ShoppingCartController : Controller
+    public class ShoppingCartController : Controller
 	{
 		private readonly IEventRepository _eventRepository;
-		private readonly IShoppingCart _shoppingCart;
+		private readonly IShoppingCartService _shoppingCart;
 
-		public ShoppingCartController(IEventRepository eventRepository, IShoppingCart shoppingCart)
+		public ShoppingCartController(IEventRepository eventRepository, IShoppingCartService shoppingCart)
 		{
 			_eventRepository = eventRepository;
 			_shoppingCart = shoppingCart;

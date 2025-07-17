@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TheAdventureJunkie.Models;
 using Microsoft.AspNetCore.Identity;
+using TheAdventureJunkie.Contracts;
+using TheAdventureJunkie.Repositories;
+using TheAdventureJunkie.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("TheAdventureJunkieDbContextConnection") ?? throw new InvalidOperationException("Connection string 'TheAdventureJunkieDbContextConnection' not found.");
@@ -17,7 +20,7 @@ builder.Services.AddTransient<IEventRepository,EventRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 
-builder.Services.AddScoped<IShoppingCart, ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>(sp => ShoppingCartService.GetCart(sp));
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
