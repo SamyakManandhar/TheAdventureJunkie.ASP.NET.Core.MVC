@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheAdventureJunkie.Models;
+using TheAdventureJunkie.Contracts;
 using TheAdventureJunkie.ViewModels;
 
 namespace TheAdventureJunkie.Components
 {
-	public class ShoppingCartSummary : ViewComponent
+    public class ShoppingCartSummary : ViewComponent
 	{
-		private readonly IShoppingCart _shoppingCart;
+		private readonly IShoppingCartService _shoppingCart;
 
-		public ShoppingCartSummary(IShoppingCart shoppingCart)
+		public ShoppingCartSummary(IShoppingCartService shoppingCart)
 		{
 			_shoppingCart = shoppingCart;
 		}

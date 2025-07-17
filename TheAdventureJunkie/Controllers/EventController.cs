@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IO.Pipelines;
+using TheAdventureJunkie.Contracts;
 using TheAdventureJunkie.Models;
 using TheAdventureJunkie.ViewModels;
 
 namespace TheAdventureJunkie.Controllers
 {
-	public class EventController:Controller
+    public class EventController:Controller
 	{
 		private readonly IEventRepository _eventRepository;
 		private readonly ICategoryRepository _categoryRepository;
