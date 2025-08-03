@@ -15,15 +15,12 @@ namespace TheAdventureJunkie.Repositories
             _shoppingCart = shoppingCart;
         }
 
-        public void CreateOrder(Order order)
+        public async Task CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
-
             List<ShoppingCartItem>? shoppingCartItems = _shoppingCart.ShoppingCartItems;
-            order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
-
+            order.OrderTotal = await _shoppingCart.GetShoppingCartTotalAsync();
             order.OrderDetails = new List<OrderDetail>();
-
             foreach (ShoppingCartItem? shoppingCartItem in shoppingCartItems)
             {
                 var orderDetail = new OrderDetail
@@ -35,10 +32,8 @@ namespace TheAdventureJunkie.Repositories
 
                 order.OrderDetails.Add(orderDetail);
             }
-
-            _theAdventureJunkieDbContext.Orders.Add(order);
-
-            _theAdventureJunkieDbContext.SaveChanges();
+            await _theAdventureJunkieDbContext.Orders.AddAsync(order);
+            await _theAdventureJunkieDbContext.SaveChangesAsync();
         }
     }
 }

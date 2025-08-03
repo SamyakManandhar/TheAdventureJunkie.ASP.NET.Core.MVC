@@ -6,44 +6,46 @@ using TheAdventureJunkie.ViewModels;
 
 namespace TheAdventureJunkie.Controllers
 {
-    public class EventController:Controller
-	{
-		private readonly IEventRepository _eventRepository;
-		private readonly ICategoryRepository _categoryRepository;
+    public class EventController : Controller
+    {
+        private readonly IEventRepository _eventRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-		public EventController(IEventRepository eventRepository, ICategoryRepository categoryRepository)
-		{
-			_eventRepository = eventRepository;
-			_categoryRepository = categoryRepository;
-		}
-		public IActionResult List(string category)
-		{
+        public EventController(IEventRepository eventRepository, ICategoryRepository categoryRepository)
+        {
+            _eventRepository = eventRepository;
+            _categoryRepository = categoryRepository;
+        }
+        public async Task<IActionResult> List(string category)
+        {
             IEnumerable<Event> events;
             string? currentCategory;
+            var allEvents = await _eventRepository.ListAllEventsAsync();
 
             if (string.IsNullOrEmpty(category))
             {
-                events = _eventRepository.AllEvents.OrderBy(p => p.EventId);
+                events = allEvents.OrderBy(p => p.EventId);
                 currentCategory = "All Events";
             }
             else
             {
-                events = _eventRepository.AllEvents.Where(p => p.Category.CategoryName == category)
-                    .OrderBy(p => p.EventId);
-                currentCategory = _categoryRepository.AllCategories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
+                events = allEvents.Where(p => p.Category.CategoryName == category)
+                                  .OrderBy(p => p.EventId);
+                var allCategories = await _categoryRepository.ListAllCategoriesAsync();
+                currentCategory = allCategories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
             }
 
             return View(new EventListViewModel(events, currentCategory));
         }
 
-		public IActionResult Details(int id)
-		{
-			var eventObj = _eventRepository.GetEventById(id);
-			if(eventObj == null)
-			{
-				return NotFound();
-			}
-			return View(eventObj);
-		}
-	}
+        public async Task<IActionResult> Details(int id)
+        {
+            var eventObj = await _eventRepository.GetEventByIdAsync(id);
+            if (eventObj == null)
+            {
+                return NotFound();
+            }
+            return View(eventObj);
+        }
+    }
 }

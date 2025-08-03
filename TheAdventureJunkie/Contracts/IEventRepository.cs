@@ -4,7 +4,7 @@ namespace TheAdventureJunkie.Contracts
 {
     public interface IEventRepository
     {
-        IEnumerable<Event> AllEvents { get; }
-        Event? GetEventById(int eventId);
+        Task<IEnumerable<Event>> ListAllEventsAsync();
+        Task<Event?> GetEventByIdAsync(int eventId);
     }
 }

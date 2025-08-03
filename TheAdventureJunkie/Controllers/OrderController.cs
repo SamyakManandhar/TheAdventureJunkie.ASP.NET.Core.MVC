@@ -26,7 +26,7 @@ namespace TheAdventureJunkie.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(OrderDto orderdto)
+        public async Task<IActionResult> Checkout(OrderDto orderdto)
         {
             OrderValidator validator = new OrderValidator();
             var validationResult = validator.Validate(orderdto);
@@ -38,7 +38,7 @@ namespace TheAdventureJunkie.Controllers
                 }
                 return View(orderdto);
             }
-            var items = _shoppingCart.GetShoppingCartItems();
+            var items = await _shoppingCart.ListShoppingCartItemsAsync();
             _shoppingCart.ShoppingCartItems = items;
 
             if (_shoppingCart.ShoppingCartItems.Count == 0)
@@ -62,8 +62,8 @@ namespace TheAdventureJunkie.Controllers
                     OrderTotal = orderdto.OrderTotal,
                     OrderPlaced = orderdto.OrderPlaced
                 };
-                _orderRepository.CreateOrder(order);
-                _shoppingCart.ClearCart();
+                await _orderRepository.CreateOrder(order);
+                await _shoppingCart.ClearCartAsync();
                 return RedirectToAction("CheckoutComplete");
             }
             return View(orderdto);

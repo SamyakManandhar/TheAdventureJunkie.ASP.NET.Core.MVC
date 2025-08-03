@@ -31,11 +31,10 @@ namespace TheAdventureJunkie.Services
             return new ShoppingCartService(context) { ShoppingCartId = cartId };
         }
 
-        public void AddToCart(Event events)
+        public async Task AddToCartAsync(Event events)
         {
-            var shoppingCartItem =
-                    _theAdventureJunkieDbContext.ShoppingCartItems.SingleOrDefault(
-                        s => s.Event.EventId == events.EventId && s.ShoppingCartId == ShoppingCartId);
+            var shoppingCartItem = await _theAdventureJunkieDbContext.ShoppingCartItems
+             .SingleOrDefaultAsync(s => s.Event.EventId == events.EventId && s.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem == null)
             {
@@ -46,48 +45,47 @@ namespace TheAdventureJunkie.Services
                     Amount = 1
                 };
 
-                _theAdventureJunkieDbContext.ShoppingCartItems.Add(shoppingCartItem);
+                await _theAdventureJunkieDbContext.ShoppingCartItems.AddAsync(shoppingCartItem);
             }
             else
             {
                 shoppingCartItem.Amount++;
             }
-            _theAdventureJunkieDbContext.SaveChanges();
+            await _theAdventureJunkieDbContext.SaveChangesAsync();
         }
 
-        public void ClearCart()
+        public async Task ClearCartAsync()
         {
-            var cartItems = _theAdventureJunkieDbContext
-                            .ShoppingCartItems
-                            .Where(cart => cart.ShoppingCartId == ShoppingCartId);
-
+            var cartItems = await _theAdventureJunkieDbContext
+                                  .ShoppingCartItems
+                                  .Where(cart => cart.ShoppingCartId == ShoppingCartId)
+                                  .ToListAsync();
             _theAdventureJunkieDbContext.ShoppingCartItems.RemoveRange(cartItems);
-
-            _theAdventureJunkieDbContext.SaveChanges();
+            await _theAdventureJunkieDbContext.SaveChangesAsync();
         }
 
-        public List<ShoppingCartItem> GetShoppingCartItems()
+        public async Task<List<ShoppingCartItem>> ListShoppingCartItemsAsync()
         {
-            return ShoppingCartItems ??=
+            return ShoppingCartItems ??= await
                        _theAdventureJunkieDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                       .Include(p => p.Event).ToList();
+                       .Include(p => p.Event).ToListAsync();
         }
 
-        public decimal GetShoppingCartTotal()
+        public async Task<decimal> GetShoppingCartTotalAsync()
         {
-            var total = _theAdventureJunkieDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-               .Select(c => c.Event.Price * c.Amount).Sum();
+            var total = await _theAdventureJunkieDbContext.ShoppingCartItems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Select(c => c.Event.Price * c.Amount)
+                .SumAsync();
             return total;
         }
 
-        public int RemoveFromCart(Event events)
+        public async Task<int> RemoveFromCartAsync(Event events)
         {
-            var shoppingCartItem =
-                               _theAdventureJunkieDbContext.ShoppingCartItems.SingleOrDefault(
+            var shoppingCartItem = await
+                               _theAdventureJunkieDbContext.ShoppingCartItems.SingleOrDefaultAsync(
                                    s => s.Event.EventId == events.EventId && s.ShoppingCartId == ShoppingCartId);
-
             var localAmount = 0;
-
             if (shoppingCartItem != null)
             {
                 if (shoppingCartItem.Amount > 1)
@@ -100,9 +98,7 @@ namespace TheAdventureJunkie.Services
                     _theAdventureJunkieDbContext.ShoppingCartItems.Remove(shoppingCartItem);
                 }
             }
-
-            _theAdventureJunkieDbContext.SaveChanges();
-
+            await _theAdventureJunkieDbContext.SaveChangesAsync();
             return localAmount;
         }
     }

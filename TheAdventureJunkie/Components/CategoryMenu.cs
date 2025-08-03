@@ -12,10 +12,10 @@ namespace TheAdventureJunkie.Components
 			_categoryRepository = categoryRepository;
 		}
 
-		public IViewComponentResult Invoke()
-		{
-			var categories = _categoryRepository.AllCategories;
-			return View(categories);
-		}
-	}
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var categories = await _categoryRepository.ListAllCategoriesAsync();
+            return View(categories);
+        }
+    }
 }
