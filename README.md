@@ -8,6 +8,7 @@ I have implemented a web application, based upon the “The Adventure Junkie” 
 🔹ASP.NET Core MVC application <br>
 🔹	Bootstrap <br>
 🔹	Razor Class Libraries (Azure.Identity) <br>
+🔹	FluentValidation <br>
 🔹	Entity Framework Core to work with the database <br>
 <br>
 •	Infrastructure: <br>
