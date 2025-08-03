@@ -14,16 +14,13 @@ namespace TheAdventureJunkie.Repositories
             _theAdventureJunkieDbContext = theAdventureJunkieDbContext;
         }
 
-        public IEnumerable<Event> AllEvents
+        public async Task<IEnumerable<Event>> ListAllEventsAsync()
         {
-            get
-            {
-                return _theAdventureJunkieDbContext.Events.Include(e => e.Category);
-            }
+            return await _theAdventureJunkieDbContext.Events.Include(e => e.Category).ToListAsync();
         }
-        public Event? GetEventById(int eventId)
+        public async Task<Event?> GetEventByIdAsync(int eventId)
         {
-            return _theAdventureJunkieDbContext.Events.FirstOrDefault(e => e.EventId == eventId);
+            return await _theAdventureJunkieDbContext.Events.FirstOrDefaultAsync(e => e.EventId == eventId);
         }
     }
 }

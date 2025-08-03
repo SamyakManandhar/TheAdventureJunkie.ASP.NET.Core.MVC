@@ -16,9 +16,9 @@ builder.Services.AddDbContext<TheAdventureJunkieDbContext>(options => {
 
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<TheAdventureJunkieDbContext>();
 
-builder.Services.AddTransient<IEventRepository,EventRepository>();
-builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
-builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IEventRepository,EventRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>(sp => ShoppingCartService.GetCart(sp));
 builder.Services.AddSession();

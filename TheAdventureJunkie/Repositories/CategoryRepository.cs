@@ -1,4 +1,5 @@
-﻿using TheAdventureJunkie.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using TheAdventureJunkie.Contracts;
 using TheAdventureJunkie.Models;
 
 namespace TheAdventureJunkie.Repositories
@@ -12,12 +13,9 @@ namespace TheAdventureJunkie.Repositories
             _theAdventureJunkieDbContext = theAdventureJunkieDbContext;
         }
 
-        public IEnumerable<Category> AllCategories
+        public async Task<IEnumerable<Category>> ListAllCategoriesAsync()
         {
-            get
-            {
-                return _theAdventureJunkieDbContext.Categories;
-            }
+            return await _theAdventureJunkieDbContext.Categories.ToListAsync();
         }
     }
 }

@@ -4,12 +4,11 @@ namespace TheAdventureJunkie.Contracts
 {
     public interface IShoppingCartService
     {
-        void AddToCart(Event events);
-        int RemoveFromCart(Event events);
-        List<ShoppingCartItem> GetShoppingCartItems();
-        void ClearCart();
-        decimal GetShoppingCartTotal();
+        Task AddToCartAsync(Event events);
+        Task<int> RemoveFromCartAsync(Event events);
+        Task<List<ShoppingCartItem>> ListShoppingCartItemsAsync();
+        Task ClearCartAsync();
+        Task<decimal> GetShoppingCartTotalAsync();
         List<ShoppingCartItem> ShoppingCartItems { get; set; }
-
     }
 }
