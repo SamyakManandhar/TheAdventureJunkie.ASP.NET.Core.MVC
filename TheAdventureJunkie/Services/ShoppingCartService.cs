@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.IO.Pipelines;
 using TheAdventureJunkie.Contracts;
+using TheAdventureJunkie.Data;
 using TheAdventureJunkie.Models;
 
 namespace TheAdventureJunkie.Services
