@@ -5,15 +5,16 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TheAdventureJunkie.Models;
+using TheAdventureJunkie.Data;
+
 
 #nullable disable
 
 namespace TheAdventureJunkie.Migrations
 {
     [DbContext(typeof(TheAdventureJunkieDbContext))]
-    [Migration("20250717104931_RevertChangeInProd")]
-    partial class RevertChangeInProd
+    [Migration("20250717144345_RevertChanges")]
+    partial class RevertChanges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

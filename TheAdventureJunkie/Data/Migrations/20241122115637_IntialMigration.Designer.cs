@@ -5,15 +5,16 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TheAdventureJunkie.Models;
+using TheAdventureJunkie.Data;
+
 
 #nullable disable
 
 namespace TheAdventureJunkie.Migrations
 {
     [DbContext(typeof(TheAdventureJunkieDbContext))]
-    [Migration("20241122160606_AddShoppingCartItem")]
-    partial class AddShoppingCartItem
+    [Migration("20241122115637_IntialMigration")]
+    partial class IntialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,30 +86,6 @@ namespace TheAdventureJunkie.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("TheAdventureJunkie.Models.ShoppingCartItem", b =>
-                {
-                    b.Property<int>("ShoppingCartItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShoppingCartItemId"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ShoppingCartItemId");
-
-                    b.HasIndex("EventId");
-
-                    b.ToTable("ShoppingCartItems");
-                });
-
             modelBuilder.Entity("TheAdventureJunkie.Models.Event", b =>
                 {
                     b.HasOne("TheAdventureJunkie.Models.Category", "Category")
@@ -118,17 +95,6 @@ namespace TheAdventureJunkie.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("TheAdventureJunkie.Models.ShoppingCartItem", b =>
-                {
-                    b.HasOne("TheAdventureJunkie.Models.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("TheAdventureJunkie.Models.Category", b =>

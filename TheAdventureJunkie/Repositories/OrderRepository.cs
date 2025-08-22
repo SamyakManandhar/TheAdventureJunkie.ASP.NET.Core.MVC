@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TheAdventureJunkie.Contracts;
+using TheAdventureJunkie.Data;
 using TheAdventureJunkie.Models;
 
 namespace TheAdventureJunkie.Repositories
