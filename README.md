@@ -6,10 +6,11 @@ I have implemented a web application, based upon the “The Adventure Junkie” 
 ## 2.	Technologies Used
 •	Web Application: <br>
 🔹ASP.NET Core MVC application <br>
-🔹	Bootstrap <br>
 🔹	Razor Class Libraries (Azure.Identity) <br>
-🔹	FluentValidation <br>
+🔹	Validation and Option Pattern <br>
 🔹	Entity Framework Core to work with the database <br>
+🔹 Microsoft Identity Platform (Azure AD B2C / Entra External ID) <br>
+🔹 Google OAuth 2.0<br>
 <br>
 •	Infrastructure: <br>
 🔹	Azure App Services (F1 Plan) <br>
@@ -27,7 +28,12 @@ I have implemented a web application, based upon the “The Adventure Junkie” 
 🔹	Microsoft SQL Server Management Studio (Enable change tracking in SQL database) <br>
 
 ## 3.	Code
-The code primarily consists of various aspect of typical ASP.NET Core MVC elements of Razor views, partial views, tag helpers, middleware configuration, components, dependency injection, Shared UI folders, ViewModels and routing. Sessions is enabled to use the shopping cart logic, and some other logics are reused. Azure.Identity, Razor class library is used to create the Login UI and logic.
+The code primarily consists of various aspect of typical ASP.NET Core MVC elements of Razor views, partial views, tag helpers, middleware configuration, components, dependency injection, Shared UI folders, ViewModels and routing. Sessions is enabled to use the shopping cart logic, and some other logics are reused. 
+
+Azure.Identity with external identity providers using OpenID Connect (OIDC) configured, Razor class library is used to create the Login UI and logic.
+
+The validation and options pattern have also been incorporated for configuration binding and input validation.
+
 The UI is developed in a responsive mobile-first manner using Bootstrap classes, further Bootstrap components are used like cards, quotes and carousel to improve UX. <br>
 <br>
 ![Alt text](images/Picture1.png)
