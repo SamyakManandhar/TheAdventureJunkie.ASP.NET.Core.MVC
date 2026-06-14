@@ -12,13 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDatabase().BindConfiguration("ConnectionStrings");
-
-builder.Services.AddRepositories();
-builder.Services.AddSession();
-builder.Services.AddHttpContextAccessor();
-
-builder.Services.AddOIDC(builder.Configuration);
-builder.Services.ConfigureAuthentication();
+builder.Services
+    .AddRepositories()
+    .AddSession()
+    .AddHttpContextAccessor()
+    .AddOIDC(builder.Configuration)
+    .ConfigureAuthentication();
 
 var app = builder.Build();
 
